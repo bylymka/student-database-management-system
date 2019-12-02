@@ -4,7 +4,7 @@
 
 void Student:: SetStudentID()
 {
-      GeneratorID student; // для каждого нового обьекта класса Student генерируем уникальный ID
+      GeneratorID student;
       this->StudentID = student.GenerateUniqueID();
 }
 
