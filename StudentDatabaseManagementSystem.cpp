@@ -13,7 +13,7 @@
 using namespace std;
 
 // показать меню и сделать выбор
-void ShowMenu(); 
+void ShowMenu();
 
 // пользователь выбирает опцию из меню
 int GetUserChoice(int user_choice);
@@ -25,7 +25,7 @@ void AddRecord(string file, bool continue_for_another_student);
 void ShowAllRecords(string file);
 
 // изменить данные о студенте
-void ModifyRecord(string file, bool continue_for_another_student); 
+void ModifyRecord(string file, bool continue_for_another_student);
 
 // удалить студента из базы
 void DeleteRecord(string file, bool continue_for_another_student);
@@ -40,8 +40,8 @@ bool ShouldContinue(bool continue_using_this_software);
 
 int main()
 {
-      int user_choice; 
-      bool continue_for_another_student = true; 
+      int user_choice;
+      bool continue_for_another_student = true;
       bool continue_using_this_software = true;
       string file = "StudentFile.txt"; // файл в котором мы будем хранить данные о студентах
 
@@ -60,15 +60,15 @@ int main()
                   case 2:
                   {
                         ShowAllRecords(file);
-                        break;     
+                        break;
                   }
-      
+
                   case 3:
                   {
                         ModifyRecord(file, continue_for_another_student);
                         break;
-                  }      
-      
+                  }
+
                   case 4:
                   {
                         DeleteRecord(file, continue_for_another_student);
@@ -89,7 +89,7 @@ int main()
 ostream & operator << (ostream & os, const Student & student_obj) // перегружаем оператор вывода << для класса Student
 {
       os << setw(15) << student_obj.StudentID;
-      os << setw(15) << student_obj.first_name; 
+      os << setw(15) << student_obj.first_name;
       os << setw(15) << student_obj.last_name;
       os << setw(30) << student_obj.faculty;
       os << setw(10) << student_obj.group << endl;
@@ -101,12 +101,12 @@ ostream & operator << (ostream & os, const Student & student_obj) // перег�
 istream & operator >> (istream & is, Student & student_obj) // перегружаем оператор ввода >> для класса Student
 {
       is >> student_obj.StudentID >> student_obj.first_name >> student_obj.last_name  >> student_obj.faculty >> student_obj.group;
-      return is; 
+      return is;
 }
 
 
 
-void ShowMenu() // показываем пользователю меню и даем ему возможность сделать выбор
+void ShowMenu()
 {
       cout << "\nSTUDENT DATABASE MANAGEMENT SYSTEM\n" << endl;
       cout << "1. Add Records" << endl;
@@ -121,7 +121,7 @@ void ShowMenu() // показываем пользователю меню и д�
 
 
 
-int GetUserChoice(int user_choice) // получаем выбор пользователя
+int GetUserChoice(int user_choice)
 {
       cin >> user_choice;
       return user_choice;
@@ -129,14 +129,14 @@ int GetUserChoice(int user_choice) // получаем выбор пользов
 
 
 
-void AddRecord(string file, bool continue_for_another_student) // добавляем нового студента в базу
+void AddRecord(string file, bool continue_for_another_student)
 {
       do
       {
             Student student;
 
             cin.ignore();
-            student.SetStudentID(); 
+            student.SetStudentID();
             cout << "Enter the first name: ";
             student.SetFirstName();
             cout << "Enter the last name: ";
@@ -170,7 +170,7 @@ void AddRecord(string file, bool continue_for_another_student) // добавля
 
 
 
-void ShowAllRecords(string file) // выводим на консоль информацию о всех студентах 
+void ShowAllRecords(string file)
 {
       Student student;
 
@@ -185,21 +185,21 @@ void ShowAllRecords(string file) // выводим на консоль инфо�
       {
             cout << setw(15) << "ID" << setw(15) << "FirstName" << setw(15) << "LastName" << setw(30) << "Faculty" << setw(10) << "Group" << endl;
 
-            
+
             file_for_reading.seekg(0,ios::beg);
 
             while(file_for_reading.read((char*)&student, sizeof(student)))
-            {    
+            {
                  cout << student;
             }
       }
-      
+
       file_for_reading.close();
 }
 
 
 
-void ModifyRecord(string file, bool continue_for_another_student)  // изменяем данные о студенте
+void ModifyRecord(string file, bool continue_for_another_student)
 {
       Student student;
 
@@ -208,13 +208,13 @@ void ModifyRecord(string file, bool continue_for_another_student)  // измен
             int searched_student_id;
 
             cout << " Enter student ID to be modified: ";
-            cin >> searched_student_id;         
+            cin >> searched_student_id;
 
             fstream file_for_modification(file, ios:: in | ios:: out | ios:: binary);
 
-            file_for_modification.seekg(0, ios_base:: beg); 
+            file_for_modification.seekg(0, ios_base:: beg);
 
-            while(file_for_modification.read((char*)&student, sizeof(student))) 
+            while(file_for_modification.read((char*)&student, sizeof(student)))
             {
                   if(searched_student_id == student.GetStudentID())
                   {
@@ -229,7 +229,7 @@ void ModifyRecord(string file, bool continue_for_another_student)  // измен
                         student.SetGroup();
 
                         // устанавливаем файл поинтер на начало изменяемого обьекта
-                        file_for_modification.seekp((file_for_modification.tellg() - sizeof(student)), ios:: beg); 
+                        file_for_modification.seekp((file_for_modification.tellg() - sizeof(student)), ios:: beg);
 
                         //записываем  новый обьект вместо старого
                         file_for_modification.write((char*) &student,sizeof(student));
@@ -240,12 +240,12 @@ void ModifyRecord(string file, bool continue_for_another_student)  // измен
 
             cout << "Do you want to change the data of another student? (if 'yes' enter 1, if 'no' enter 0)" << endl;
             cin >> continue_for_another_student;
-            
+
       }while(continue_for_another_student == true);
 }
 
 
-void DeleteRecord(string file, bool continue_for_another_student) // удаляем запись о студенте из базы
+void DeleteRecord(string file, bool continue_for_another_student)
 {
       do
       {
@@ -288,7 +288,7 @@ void DeleteRecord(string file, bool continue_for_another_student) // удаля�
 void QuitProgram()
 {
       cout << "\n\nThank you for using this software!\n\n";
-      exit(0);      
+      exit(0);
 }
 
 bool ShouldContinue(bool continue_using_this_software)
@@ -297,4 +297,3 @@ bool ShouldContinue(bool continue_using_this_software)
       cin >> continue_using_this_software;
       return continue_using_this_software;
 }
-
