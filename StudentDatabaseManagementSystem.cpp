@@ -12,28 +12,20 @@
 
 using namespace std;
 
-// показать меню и сделать выбор
 void ShowMenu();
 
-// пользователь выбирает опцию из меню
 int GetUserChoice(int user_choice);
 
-// добавить запись о студенте
 void AddRecord(string file, bool continue_for_another_student);
 
-// показать записи о всех студентах
 void ShowAllRecords(string file);
 
-// изменить данные о студенте
 void ModifyRecord(string file, bool continue_for_another_student);
 
-// удалить студента из базы
 void DeleteRecord(string file, bool continue_for_another_student);
 
-// выйти из программы
 void QuitProgram();
 
-// продолжить использовать приложение
 bool ShouldContinue(bool continue_using_this_software);
 
 
@@ -43,7 +35,7 @@ int main()
       int user_choice;
       bool continue_for_another_student = true;
       bool continue_using_this_software = true;
-      string file = "StudentFile.txt"; // файл в котором мы будем хранить данные о студентах
+      string file = "StudentFile.txt";
 
       do
       {
